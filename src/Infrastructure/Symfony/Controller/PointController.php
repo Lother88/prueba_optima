@@ -55,9 +55,9 @@ class PointController
 
         return new JsonResponse(array_map(function (Point $point) {
             return [
-                'id' => $point->getId(),
-                'x' => $point->getX(),
-                'y' => $point->getY(),
+                'id' => $point->id,
+                'x' => $point->x,
+                'y' => $point->y,
             ];
         }, $points));
     }

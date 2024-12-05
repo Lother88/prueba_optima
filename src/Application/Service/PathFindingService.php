@@ -66,7 +66,7 @@ class PathFindingService
         $graph = [];
 
         foreach ($points as $point) {
-            $graph[$point->getId()] = [];
+            $graph[$point->id] = [];
         }
 
         foreach ($this->connections as $connection) {

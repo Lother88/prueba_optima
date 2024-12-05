@@ -4,7 +4,7 @@ namespace App\Tests\Application\Service;
 
 use App\Application\Service\PathFindingService;
 use App\Domain\Entity\Point;
-use App\Infrastructure\Persistence\InMemoryPointRepository;
+use App\Infrastructure\Persistence\InMemory\Repository\InMemoryPointRepository;
 use App\Domain\Service\DijkstraAlgorithm;
 use PHPUnit\Framework\TestCase;
 
