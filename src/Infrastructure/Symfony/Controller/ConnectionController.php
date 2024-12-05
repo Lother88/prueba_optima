@@ -6,7 +6,7 @@ use App\Application\Service\PathFindingService;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use OpenApi\Annotations as OA;
+use OpenApi\Attributes as OA;
 
 class ConnectionController
 {
@@ -18,39 +18,39 @@ class ConnectionController
     }
 
     #[Route('/api/connections', methods: ['POST'])]
-    /**
-     * @OA\Post(
-     *     path="/connections",
-     *     summary="Crear o actualizar una conexión",
-     *     description="Crea o actualiza una conexión entre dos puntos con una distancia especificada",
-     *     tags={"Connections"},
-     *     @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(
-     *             type="object",
-     *             @OA\Property(property="start", type="string", description="ID del punto de inicio"),
-     *             @OA\Property(property="end", type="string", description="ID del punto de destino"),
-     *             @OA\Property(property="distance", type="number", description="Distancia entre los puntos")
-     *         )
-     *     ),
-     *     @OA\Response(
-     *         response=201,
-     *         description="Conexión creada o actualizada correctamente",
-     *         @OA\JsonContent(
-     *             type="object",
-     *             @OA\Property(property="message", type="string", example="Conexión creada o actualizada correctamente.")
-     *         )
-     *     ),
-     *     @OA\Response(
-     *         response=400,
-     *         description="Parámetros faltantes o inválidos",
-     *         @OA\JsonContent(
-     *             type="object",
-     *             @OA\Property(property="error", type="string", example="Faltan parámetros start, end o distance.")
-     *         )
-     *     )
-     * )
-     */
+    #[OA\Post(
+        path: '/api/connections',
+        summary: 'Crear o actualizar una conexión',
+        description: 'Crea o actualiza una conexión entre dos puntos con una distancia especificada',
+        tags: ['Connections'],
+        requestBody: new OA\RequestBody(
+            required: true,
+            content: new OA\JsonContent(
+                type: 'object',
+                properties: [
+                    new OA\Property(property: 'start', type: 'string', description: 'ID del punto de inicio'),
+                    new OA\Property(property: 'end', type: 'string', description: 'ID del punto de destino'),
+                    new OA\Property(property: 'distance', type: 'number', description: 'Distancia entre los puntos')
+                ]
+            )
+        ),
+        responses: [
+            new OA\Response(
+                response: 201,
+                description: 'Conexión creada o actualizada correctamente',
+                content: new OA\JsonContent(
+                    properties: [new OA\Property(property: 'message', type: 'string', example: 'Conexión creada o actualizada correctamente.')]
+                )
+            ),
+            new OA\Response(
+                response: 400,
+                description: 'Parámetros faltantes o inválidos',
+                content: new OA\JsonContent(
+                    properties: [new OA\Property(property: 'error', type: 'string', example: 'Faltan parámetros start, end o distance.')]
+                )
+            )
+        ]
+    )]
     public function createOrUpdateConnection(Request $request): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
@@ -72,38 +72,38 @@ class ConnectionController
     }
 
     #[Route('/api/connections', methods: ['DELETE'])]
-    /**
-     * @OA\Delete(
-     *     path="/connections",
-     *     summary="Eliminar una conexión",
-     *     description="Elimina una conexión entre dos puntos especificados",
-     *     tags={"Connections"},
-     *     @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(
-     *             type="object",
-     *             @OA\Property(property="start", type="string", description="ID del punto de inicio"),
-     *             @OA\Property(property="end", type="string", description="ID del punto de destino")
-     *         )
-     *     ),
-     *     @OA\Response(
-     *         response=200,
-     *         description="Conexión eliminada correctamente",
-     *         @OA\JsonContent(
-     *             type="object",
-     *             @OA\Property(property="message", type="string", example="Conexión eliminada correctamente.")
-     *         )
-     *     ),
-     *     @OA\Response(
-     *         response=400,
-     *         description="Parámetros faltantes o inválidos",
-     *         @OA\JsonContent(
-     *             type="object",
-     *             @OA\Property(property="error", type="string", example="Faltan parámetros start y end.")
-     *         )
-     *     )
-     * )
-     */
+    #[OA\Delete(
+        path: '/api/connections',
+        summary: 'Eliminar una conexión',
+        description: 'Elimina una conexión entre dos puntos especificados',
+        tags: ['Connections'],
+        requestBody: new OA\RequestBody(
+            required: true,
+            content: new OA\JsonContent(
+                type: 'object',
+                properties: [
+                    new OA\Property(property: 'start', type: 'string', description: 'ID del punto de inicio'),
+                    new OA\Property(property: 'end', type: 'string', description: 'ID del punto de destino')
+                ]
+            )
+        ),
+        responses: [
+            new OA\Response(
+                response: 200,
+                description: 'Conexión eliminada correctamente',
+                content: new OA\JsonContent(
+                    properties: [new OA\Property(property: 'message', type: 'string', example: 'Conexión eliminada correctamente.')]
+                )
+            ),
+            new OA\Response(
+                response: 400,
+                description: 'Parámetros faltantes o inválidos',
+                content: new OA\JsonContent(
+                    properties: [new OA\Property(property: 'error', type: 'string', example: 'Faltan parámetros start y end.')]
+                )
+            )
+        ]
+    )]
     public function deleteConnection(Request $request): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
