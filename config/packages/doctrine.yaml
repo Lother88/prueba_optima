@@ -12,11 +12,11 @@ doctrine:
             Doctrine\DBAL\Platforms\PostgreSQLPlatform: identity
         auto_mapping: false
         mappings:
-            App\Domain\Entity:
+            App:
                 type: yaml
                 dir: '%kernel.project_dir%/src/Infrastructure/Persistence/Doctrine/Mapping'
                 prefix: 'App\Domain\Entity'
-                alias: App
+                is_bundle: false
         controller_resolver:
             auto_mapping: false
 
