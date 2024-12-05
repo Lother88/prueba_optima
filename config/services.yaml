@@ -22,6 +22,7 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    App\Domain\Repository\PointRepositoryInterface: '@App\Infrastructure\Persistence\Doctrine\Repository\DoctrinePointRepository'
     
     App\Infrastructure\Symfony\Controller\:
         resource: '../src/Infrastructure/Symfony/Controller'
@@ -31,3 +32,7 @@ services:
     App\Infrastructure\Persistence\Doctrine\Repository\DoctrinePointRepository:
         arguments:
             $entityManager: '@doctrine.orm.entity_manager'
+
+    App\Application\Service\PathFindingService:
+        arguments:
+            $pointRepository: '@App\Infrastructure\Persistence\Doctrine\Repository\DoctrinePointRepository'
