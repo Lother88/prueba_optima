@@ -27,3 +27,7 @@ services:
         resource: '../src/Infrastructure/Symfony/Controller'
         public: true
         tags: ['controller.service_arguments']
+
+    App\Infrastructure\Persistence\Doctrine\Repository\DoctrinePointRepository:
+        arguments:
+            $entityManager: '@doctrine.orm.entity_manager'

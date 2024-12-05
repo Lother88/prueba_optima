@@ -1,0 +1,14 @@
+App\Domain\Entity\Point:
+    type: entity
+    table: points
+    repositoryClass: App\Repository\PointRepository
+    fields:
+        id:
+            type: string
+            id: true
+            length: 36
+            nullable: false
+        x:
+            type: float
+        y:
+            type: float
