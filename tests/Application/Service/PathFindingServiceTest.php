@@ -64,8 +64,8 @@ class PathFindingServiceTest extends TestCase
 
         // Verificar resultados
         $this->assertInstanceOf(PathResult::class, $result);
-        $this->assertSame(['A', 'B', 'C'], $result->getPath());
-        $this->assertEquals(3.5, $result->getTotalDistance());
+        $this->assertSame(['A', 'B', 'C'], $result->path);
+        $this->assertEquals(3.5, $result->totalDistance);
     }
 
 

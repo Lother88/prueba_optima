@@ -27,8 +27,8 @@ class DijkstraAlgorithmTest extends TestCase
         $result = $this->algorithm->findPath($graph, 'A', 'D');
     
         $this->assertInstanceOf(PathResult::class, $result);
-        $this->assertEquals(['A', 'B', 'C', 'D'], $result->getPath());
-        $this->assertEquals(10, $result->getTotalDistance());
+        $this->assertEquals(['A', 'B', 'C', 'D'], $result->path);
+        $this->assertEquals(10, $result->totalDistance);
     }
     
 
@@ -56,8 +56,8 @@ class DijkstraAlgorithmTest extends TestCase
         $result = $this->algorithm->findPath($graph, 'A', 'A');
 
         $this->assertInstanceOf(PathResult::class, $result);
-        $this->assertEquals(['A'], $result->getPath());
-        $this->assertEquals(0, $result->getTotalDistance());
+        $this->assertEquals(['A'], $result->path);
+        $this->assertEquals(0, $result->totalDistance);
     }
 
     public function testFindPathLargeGraph(): void
@@ -73,8 +73,8 @@ class DijkstraAlgorithmTest extends TestCase
         $result = $this->algorithm->findPath($graph, 'A', 'E');
 
         $this->assertInstanceOf(PathResult::class, $result);
-        $this->assertEquals(['A', 'B', 'C', 'D', 'E'], $result->getPath());
-        $this->assertEquals(7, $result->getTotalDistance());
+        $this->assertEquals(['A', 'B', 'C', 'D', 'E'], $result->path);
+        $this->assertEquals(7, $result->totalDistance);
     }
 
     public function testFindPathUnreachableNode(): void

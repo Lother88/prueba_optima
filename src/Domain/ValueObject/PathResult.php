@@ -4,22 +4,35 @@ namespace App\Domain\ValueObject;
 
 class PathResult
 {
-    private array $path; // IDs de los puntos recorridos
-    private float $totalDistance;
-
-    public function __construct(array $path, float $totalDistance)
-    {
-        $this->path = $path;
-        $this->totalDistance = $totalDistance;
+    public function __construct(
+        public readonly array $path,
+        public readonly float $totalDistance
+    ){
+        $this->validatePath();
+        $this->validateTotalDistance();
     }
 
-    public function getPath(): array
+    private function validatePath(): void
     {
-        return $this->path;
+        if (empty($this->path)) {
+            throw new \InvalidArgumentException('El camino no puede estar vacío.');
+        }
+
+        foreach ($this->path as $node) {
+            if (!is_string($node)) {
+                throw new \InvalidArgumentException('Cada nodo en el camino debe ser un string.');
+            }
+        }
     }
 
-    public function getTotalDistance(): float
+    private function validateTotalDistance(): void
     {
-        return $this->totalDistance;
+        if ($this->totalDistance < 0) {
+            throw new \InvalidArgumentException('La distancia total no puede ser negativa.');
+        }
+
+        if (!is_float($this->totalDistance)) {
+            throw new \InvalidArgumentException('La distancia total debe ser un número de tipo float.');
+        }
     }
 }

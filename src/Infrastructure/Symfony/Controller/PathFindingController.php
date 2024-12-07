@@ -72,8 +72,8 @@ class PathFindingController
 
             // Crear y devolver respuesta JSON
             return new JsonResponse([
-                'path' => $pathResult->getPath(),
-                'totalDistance' => $pathResult->getTotalDistance()
+                'path' => $pathResult->path,
+                'totalDistance' => $pathResult->totalDistance
             ]);
         } catch (\Exception $e) {
             // Manejar excepciones (por ejemplo, puntos no encontrados)
