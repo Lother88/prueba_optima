@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Infrastructure\Persistence\Doctrine;
+namespace App\Infrastructure\Persistence\Doctrine\Repository;
 
 use App\Domain\Entity\Point;
 use App\Domain\Entity\PointUnion;

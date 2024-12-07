@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Infrastructure\Persistence\InMemory;
+namespace App\Infrastructure\Persistence\InMemory\Repository;
 
 use App\Domain\Entity\Point;
 use App\Domain\Entity\PointUnion;
@@ -36,11 +36,11 @@ class InMemoryPointUnionRepository implements PointUnionRepositoryInterface
 
     public function save(PointUnion $union): void
     {
-        $this->unions[$union->getId()] = $union;
+        $this->unions[$union->id] = $union;
     }
 
     public function delete(PointUnion $union): void
     {
-        unset($this->unions[$union->getId()]);
+        unset($this->unions[$union->id]);
     }
 }
