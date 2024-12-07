@@ -1,0 +1,13 @@
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                                      http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="App\Domain\Entity\PointUnion" table="point_unions">
+        <id name="id" type="string" column="id">
+            <generator strategy="NONE"/>
+        </id>
+        <many-to-one field="point1" target-entity="App\Domain\Entity\Point"/>
+        <many-to-one field="point2" target-entity="App\Domain\Entity\Point"/>
+        <field name="distance" type="float"/>
+    </entity>
+</doctrine-mapping>
