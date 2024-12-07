@@ -154,7 +154,7 @@ class PointController
             return new JsonResponse(['error' => 'Punto no encontrado.'], 404);
         }
 
-        $this->pointRepository->delete($id);
+        $this->pointRepository->delete($point);
 
         return new JsonResponse(['message' => 'Punto eliminado correctamente.']);
     }

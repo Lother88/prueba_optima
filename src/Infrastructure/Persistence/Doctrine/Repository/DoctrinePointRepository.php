@@ -33,4 +33,10 @@ class DoctrinePointRepository implements PointRepositoryInterface
     {
         return $this->repository->find($id);
     }
+
+    public function delete(Point $point): void
+    {
+        $this->entityManager->remove($point);
+        $this->entityManager->flush();
+    }
 }

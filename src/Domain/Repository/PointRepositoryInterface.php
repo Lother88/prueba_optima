@@ -6,7 +6,8 @@ use App\Domain\Entity\Point;
 
 interface PointRepositoryInterface
 {
-    public function findAll(): array; // Retorna un array de puntos
+    public function findAll(): array;
     public function save(Point $point): void;
     public function findById(string $id): ?Point;
+    public function delete(Point $point): void;
 }

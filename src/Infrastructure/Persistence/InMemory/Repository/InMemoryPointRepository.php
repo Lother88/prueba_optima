@@ -23,4 +23,9 @@ class InMemoryPointRepository implements PointRepositoryInterface
     {
         return $this->points[$id] ?? null;
     }
+
+    public function delete(Point $point): void
+    {
+        unset($this->points[$point->id]);
+    }
 }
