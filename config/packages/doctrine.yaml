@@ -8,14 +8,13 @@ doctrine:
         report_fields_where_declared: true
         validate_xml_mapping: true
         naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
-        identity_generation_preferences:
-            Doctrine\DBAL\Platforms\PostgreSQLPlatform: identity
-        auto_mapping: false
+        auto_mapping: true
         mappings:
             App:
-                type: yaml
+                type: xml
                 dir: '%kernel.project_dir%/src/Infrastructure/Persistence/Doctrine/Mapping'
                 prefix: 'App\Domain\Entity'
+                alias: App
                 is_bundle: false
         controller_resolver:
             auto_mapping: false
