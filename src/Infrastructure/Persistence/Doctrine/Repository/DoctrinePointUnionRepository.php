@@ -7,7 +7,7 @@ use App\Domain\Entity\PointUnion;
 use App\Domain\Repository\PointUnionRepositoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 
-class DoctrinePointUnionRepository implements PointUnionRepositoryInterface
+final class DoctrinePointUnionRepository implements PointUnionRepositoryInterface
 {
     public function __construct(
         private EntityManagerInterface $entityManager

@@ -7,7 +7,7 @@ use App\Domain\Repository\PointRepositoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ObjectRepository;
 
-class DoctrinePointRepository implements PointRepositoryInterface
+final class DoctrinePointRepository implements PointRepositoryInterface
 {
     private ObjectRepository $repository;
     private EntityManagerInterface $entityManager;

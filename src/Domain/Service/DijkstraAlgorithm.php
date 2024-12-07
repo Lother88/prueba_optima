@@ -1,11 +1,12 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Domain\Service;
 
 use App\Domain\Interface\PathFindingAlgorithm;
 use App\Domain\ValueObject\PathResult;
 
-class DijkstraAlgorithm implements PathFindingAlgorithm
+final class DijkstraAlgorithm implements PathFindingAlgorithm
 {
     public function findPath(array $graph, string $start, string $end): PathResult
     {
