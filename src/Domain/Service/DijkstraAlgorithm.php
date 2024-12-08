@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Domain\Service;
@@ -39,8 +40,8 @@ final class DijkstraAlgorithm implements PathFindingAlgorithm
 
         // 3. Verificar si el nodo de destino es accesible
         $totalDistance = $distances[$end];
-        
-        if ($totalDistance === PHP_INT_MAX) {
+
+        if (PHP_INT_MAX === $totalDistance) {
             throw new \Exception("No hay camino válido entre $start y $end.");
         }
 
@@ -76,38 +77,37 @@ final class DijkstraAlgorithm implements PathFindingAlgorithm
     }
 
     private function processNeighbors(
-      array $neighbors,
-      string $currentNode,
-      array &$distances,
-      array &$previousNodes,
-      \SplPriorityQueue $priorityQueue
+        array $neighbors,
+        string $currentNode,
+        array &$distances,
+        array &$previousNodes,
+        \SplPriorityQueue $priorityQueue,
     ): void {
-      foreach ($neighbors as $neighbor => $distance) {
-          $newDistance = $distances[$currentNode] + $distance;
+        foreach ($neighbors as $neighbor => $distance) {
+            $newDistance = $distances[$currentNode] + $distance;
 
-          if ($newDistance < $distances[$neighbor]) {
-              $distances[$neighbor] = $newDistance;
-              $previousNodes[$neighbor] = $currentNode;
-              $priorityQueue->insert($neighbor, -$newDistance);
-          }
-      }
+            if ($newDistance < $distances[$neighbor]) {
+                $distances[$neighbor] = $newDistance;
+                $previousNodes[$neighbor] = $currentNode;
+                $priorityQueue->insert($neighbor, -$newDistance);
+            }
+        }
     }
 
     private function reconstructPath(array $previousNodes, string $start, string $end): array
     {
-      $path = [];
-      $currentNode = $end;
+        $path = [];
+        $currentNode = $end;
 
-      while ($currentNode !== null) {
-          array_unshift($path, $currentNode);
-          $currentNode = $previousNodes[$currentNode];
-      }
+        while (null !== $currentNode) {
+            array_unshift($path, $currentNode);
+            $currentNode = $previousNodes[$currentNode];
+        }
 
-      if ($path[0] !== $start) {
-          throw new \Exception("No hay camino válido entre $start y $end.");
-      }
+        if ($path[0] !== $start) {
+            throw new \Exception("No hay camino válido entre $start y $end.");
+        }
 
-      return $path;
+        return $path;
     }
-
 }

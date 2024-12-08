@@ -2,14 +2,14 @@
 
 namespace App\Tests\Application\Service;
 
-use PHPUnit\Framework\TestCase;
 use App\Application\Service\PathFindingService;
+use App\Domain\Entity\Point;
+use App\Domain\Entity\PointUnion;
 use App\Domain\Repository\PointRepositoryInterface;
 use App\Domain\Repository\PointUnionRepositoryInterface;
 use App\Domain\Service\DijkstraAlgorithm;
-use App\Domain\Entity\Point;
-use App\Domain\Entity\PointUnion;
 use App\Domain\ValueObject\PathResult;
+use PHPUnit\Framework\TestCase;
 
 class PathFindingServiceTest extends TestCase
 {
@@ -67,7 +67,6 @@ class PathFindingServiceTest extends TestCase
         $this->assertSame(['A', 'B', 'C'], $result->path);
         $this->assertEquals(3.5, $result->totalDistance);
     }
-
 
     public function testCalculateShortestPathNoPath(): void
     {

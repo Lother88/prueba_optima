@@ -7,7 +7,7 @@ class Point
     public function __construct(
         public readonly string $id,
         public readonly float $x,
-        public readonly float $y
+        public readonly float $y,
     ) {
         if (empty($id) || !is_string($id)) {
             throw new \InvalidArgumentException('El ID debe ser un string no vacío.');

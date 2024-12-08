@@ -4,10 +4,10 @@ namespace App\Infrastructure\Symfony\Controller;
 
 use App\Domain\Entity\Point;
 use App\Domain\Repository\PointRepositoryInterface;
+use OpenApi\Attributes as OA;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use OpenApi\Attributes as OA;
 
 class PointController
 {
@@ -35,7 +35,7 @@ class PointController
                         properties: [
                             new OA\Property(property: 'id', type: 'string', description: 'ID del punto'),
                             new OA\Property(property: 'x', type: 'number', description: 'Coordenada X'),
-                            new OA\Property(property: 'y', type: 'number', description: 'Coordenada Y')
+                            new OA\Property(property: 'y', type: 'number', description: 'Coordenada Y'),
                         ]
                     )
                 )
@@ -46,7 +46,7 @@ class PointController
                 content: new OA\JsonContent(
                     properties: [new OA\Property(property: 'error', type: 'string', example: 'Error al recuperar los puntos.')]
                 )
-            )
+            ),
         ]
     )]
     public function listPoints(): JsonResponse
@@ -75,7 +75,7 @@ class PointController
                 properties: [
                     new OA\Property(property: 'id', type: 'string', description: 'ID único del punto'),
                     new OA\Property(property: 'x', type: 'number', description: 'Coordenada X'),
-                    new OA\Property(property: 'y', type: 'number', description: 'Coordenada Y')
+                    new OA\Property(property: 'y', type: 'number', description: 'Coordenada Y'),
                 ]
             )
         ),
@@ -93,7 +93,7 @@ class PointController
                 content: new OA\JsonContent(
                     properties: [new OA\Property(property: 'error', type: 'string', example: 'Faltan parámetros id, x o y.')]
                 )
-            )
+            ),
         ]
     )]
     public function createPoint(Request $request): JsonResponse
@@ -104,7 +104,7 @@ class PointController
         $x = $data['x'] ?? null;
         $y = $data['y'] ?? null;
 
-        if (!$id || $x === null || $y === null) {
+        if (!$id || null === $x || null === $y) {
             return new JsonResponse(['error' => 'Faltan parámetros id, x o y.'], 400);
         }
 
@@ -127,7 +127,7 @@ class PointController
                 required: true,
                 description: 'ID del punto a eliminar',
                 schema: new OA\Schema(type: 'string')
-            )
+            ),
         ],
         responses: [
             new OA\Response(
@@ -143,7 +143,7 @@ class PointController
                 content: new OA\JsonContent(
                     properties: [new OA\Property(property: 'error', type: 'string', example: 'Punto no encontrado.')]
                 )
-            )
+            ),
         ]
     )]
     public function deletePoint(string $id): JsonResponse

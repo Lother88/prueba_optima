@@ -10,7 +10,7 @@ class PointUnion
         public readonly string $id,
         public readonly Point $point1,
         public readonly Point $point2,
-        public float $distance
+        public float $distance,
     ) {
         // Validar que los puntos no sean los mismos
         if ($point1->id === $point2->id) {

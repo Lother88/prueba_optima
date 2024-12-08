@@ -2,10 +2,9 @@
 
 namespace App\Application\Service;
 
-use App\Domain\Entity\Point;
+use App\Domain\Interface\PathFindingAlgorithm;
 use App\Domain\Repository\PointRepositoryInterface;
 use App\Domain\Repository\PointUnionRepositoryInterface;
-use App\Domain\Interface\PathFindingAlgorithm;
 use App\Domain\ValueObject\PathResult;
 
 class PathFindingService
@@ -17,7 +16,7 @@ class PathFindingService
     public function __construct(
         PointRepositoryInterface $pointRepository,
         PointUnionRepositoryInterface $unionRepository,
-        PathFindingAlgorithm $algorithm
+        PathFindingAlgorithm $algorithm,
     ) {
         $this->pointRepository = $pointRepository;
         $this->unionRepository = $unionRepository;
@@ -33,10 +32,11 @@ class PathFindingService
         $endPoint = $this->pointRepository->findById($endId);
 
         if (!$startPoint || !$endPoint) {
-            throw new \InvalidArgumentException("Uno o ambos puntos no existen.");
+            throw new \InvalidArgumentException('Uno o ambos puntos no existen.');
         }
 
         $graph = $this->buildGraph();
+
         return $this->algorithm->findPath($graph, $startId, $endId);
     }
 

@@ -6,8 +6,8 @@ class PathResult
 {
     public function __construct(
         public readonly array $path,
-        public readonly float $totalDistance
-    ){
+        public readonly float $totalDistance,
+    ) {
         $this->validatePath();
         $this->validateTotalDistance();
     }

@@ -5,10 +5,10 @@ namespace App\Infrastructure\Symfony\Controller;
 use App\Domain\Entity\PointUnion;
 use App\Domain\Repository\PointRepositoryInterface;
 use App\Domain\Repository\PointUnionRepositoryInterface;
+use OpenApi\Attributes as OA;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use OpenApi\Attributes as OA;
 
 #[Route('/api/points/unions')]
 #[OA\Tag(name: 'Point Unions')]
@@ -16,8 +16,9 @@ class PointUnionController
 {
     public function __construct(
         private PointUnionRepositoryInterface $unionRepository,
-        private PointRepositoryInterface $pointRepository
-    ) {}
+        private PointRepositoryInterface $pointRepository,
+    ) {
+    }
 
     #[Route('', methods: ['POST'])]
     #[OA\Post(
@@ -32,7 +33,7 @@ class PointUnionController
                 properties: [
                     new OA\Property(property: 'point1', type: 'string', description: 'ID of the first point'),
                     new OA\Property(property: 'point2', type: 'string', description: 'ID of the second point'),
-                    new OA\Property(property: 'distance', type: 'number', format: 'float', description: 'Distance between the two points')
+                    new OA\Property(property: 'distance', type: 'number', format: 'float', description: 'Distance between the two points'),
                 ]
             )
         ),
@@ -45,7 +46,7 @@ class PointUnionController
                         new OA\Property(property: 'id', type: 'string'),
                         new OA\Property(property: 'point1', type: 'string'),
                         new OA\Property(property: 'point2', type: 'string'),
-                        new OA\Property(property: 'distance', type: 'number', format: 'float')
+                        new OA\Property(property: 'distance', type: 'number', format: 'float'),
                     ]
                 )
             ),
@@ -54,10 +55,10 @@ class PointUnionController
                 description: 'One or both points not found',
                 content: new OA\JsonContent(
                     properties: [
-                        new OA\Property(property: 'error', type: 'string')
+                        new OA\Property(property: 'error', type: 'string'),
                     ]
                 )
-            )
+            ),
         ]
     )]
     public function createOrUpdateUnion(Request $request): JsonResponse
@@ -85,7 +86,7 @@ class PointUnionController
             'id' => $union->id,
             'point1' => $point1->id,
             'point2' => $point2->id,
-            'distance' => $union->distance
+            'distance' => $union->distance,
         ], JsonResponse::HTTP_CREATED);
     }
 
@@ -106,22 +107,22 @@ class PointUnionController
                             new OA\Property(property: 'id', type: 'string'),
                             new OA\Property(property: 'point1', type: 'string'),
                             new OA\Property(property: 'point2', type: 'string'),
-                            new OA\Property(property: 'distance', type: 'number', format: 'float')
+                            new OA\Property(property: 'distance', type: 'number', format: 'float'),
                         ]
                     )
                 )
-            )
+            ),
         ]
     )]
     public function getAllUnions(): JsonResponse
     {
         $unions = $this->unionRepository->findAll();
 
-        $response = array_map(fn(PointUnion $union) => [
+        $response = array_map(fn (PointUnion $union) => [
             'id' => $union->id,
             'point1' => $union->point1->id,
             'point2' => $union->point2->id,
-            'distance' => $union->distance
+            'distance' => $union->distance,
         ], $unions);
 
         return new JsonResponse($response);
@@ -142,7 +143,7 @@ class PointUnionController
                         new OA\Property(property: 'id', type: 'string'),
                         new OA\Property(property: 'point1', type: 'string'),
                         new OA\Property(property: 'point2', type: 'string'),
-                        new OA\Property(property: 'distance', type: 'number', format: 'float')
+                        new OA\Property(property: 'distance', type: 'number', format: 'float'),
                     ]
                 )
             ),
@@ -151,10 +152,10 @@ class PointUnionController
                 description: 'Union not found',
                 content: new OA\JsonContent(
                     properties: [
-                        new OA\Property(property: 'error', type: 'string')
+                        new OA\Property(property: 'error', type: 'string'),
                     ]
                 )
-            )
+            ),
         ]
     )]
     public function getUnionById(string $id): JsonResponse
@@ -169,7 +170,7 @@ class PointUnionController
             'id' => $union->id,
             'point1' => $union->point1->id,
             'point2' => $union->point2->id,
-            'distance' => $union->distance
+            'distance' => $union->distance,
         ]);
     }
 
@@ -185,7 +186,7 @@ class PointUnionController
                 description: 'Union deleted successfully',
                 content: new OA\JsonContent(
                     properties: [
-                        new OA\Property(property: 'message', type: 'string')
+                        new OA\Property(property: 'message', type: 'string'),
                     ]
                 )
             ),
@@ -194,10 +195,10 @@ class PointUnionController
                 description: 'Union not found',
                 content: new OA\JsonContent(
                     properties: [
-                        new OA\Property(property: 'error', type: 'string')
+                        new OA\Property(property: 'error', type: 'string'),
                     ]
                 )
-            )
+            ),
         ]
     )]
     public function deleteUnion(string $id): JsonResponse

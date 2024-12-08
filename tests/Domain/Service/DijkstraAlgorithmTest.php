@@ -23,14 +23,13 @@ class DijkstraAlgorithmTest extends TestCase
             'C' => ['A' => 10, 'B' => 3, 'D' => 2],
             'D' => ['B' => 20, 'C' => 2],
         ];
-    
+
         $result = $this->algorithm->findPath($graph, 'A', 'D');
-    
+
         $this->assertInstanceOf(PathResult::class, $result);
         $this->assertEquals(['A', 'B', 'C', 'D'], $result->path);
         $this->assertEquals(10, $result->totalDistance);
     }
-    
 
     public function testFindPathNoPath(): void
     {
@@ -42,7 +41,7 @@ class DijkstraAlgorithmTest extends TestCase
         ];
 
         $this->expectException(\Exception::class);
-        $this->expectExceptionMessage("No hay camino válido entre A y D.");
+        $this->expectExceptionMessage('No hay camino válido entre A y D.');
 
         $this->algorithm->findPath($graph, 'A', 'D');
     }
@@ -87,7 +86,7 @@ class DijkstraAlgorithmTest extends TestCase
         ];
 
         $this->expectException(\Exception::class);
-        $this->expectExceptionMessage("No hay camino válido entre A y D.");
+        $this->expectExceptionMessage('No hay camino válido entre A y D.');
 
         $this->algorithm->findPath($graph, 'A', 'D');
     }

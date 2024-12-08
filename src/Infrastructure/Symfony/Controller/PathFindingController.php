@@ -3,10 +3,10 @@
 namespace App\Infrastructure\Symfony\Controller;
 
 use App\Application\Service\PathFindingService;
+use OpenApi\Attributes as OA;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use OpenApi\Attributes as OA;
 
 class PathFindingController
 {
@@ -29,7 +29,7 @@ class PathFindingController
                 type: 'object',
                 properties: [
                     new OA\Property(property: 'start', type: 'string', description: 'ID del punto de inicio'),
-                    new OA\Property(property: 'end', type: 'string', description: 'ID del punto de destino')
+                    new OA\Property(property: 'end', type: 'string', description: 'ID del punto de destino'),
                 ]
             )
         ),
@@ -40,7 +40,7 @@ class PathFindingController
                 content: new OA\JsonContent(
                     properties: [
                         new OA\Property(property: 'path', type: 'array', items: new OA\Items(type: 'string')),
-                        new OA\Property(property: 'totalDistance', type: 'number', format: 'float')
+                        new OA\Property(property: 'totalDistance', type: 'number', format: 'float'),
                     ]
                 )
             ),
@@ -50,7 +50,7 @@ class PathFindingController
                 content: new OA\JsonContent(
                     properties: [new OA\Property(property: 'error', type: 'string')]
                 )
-            )
+            ),
         ]
     )]
     public function calculateShortestPath(Request $request): JsonResponse
@@ -73,7 +73,7 @@ class PathFindingController
             // Crear y devolver respuesta JSON
             return new JsonResponse([
                 'path' => $pathResult->path,
-                'totalDistance' => $pathResult->totalDistance
+                'totalDistance' => $pathResult->totalDistance,
             ]);
         } catch (\Exception $e) {
             // Manejar excepciones (por ejemplo, puntos no encontrados)

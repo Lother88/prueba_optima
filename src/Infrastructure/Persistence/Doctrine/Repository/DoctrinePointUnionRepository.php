@@ -10,8 +10,9 @@ use Doctrine\ORM\EntityManagerInterface;
 final class DoctrinePointUnionRepository implements PointUnionRepositoryInterface
 {
     public function __construct(
-        private EntityManagerInterface $entityManager
-    ) {}
+        private EntityManagerInterface $entityManager,
+    ) {
+    }
 
     public function findAll(): array
     {

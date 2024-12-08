@@ -21,12 +21,12 @@ final class Version20241205211220 extends AbstractMigration
     {
         // Create the "points" table
         $table = $schema->createTable('points');
-        
+
         // Define the columns of the "points" table
         $table->addColumn('id', 'string', ['length' => 255]);
         $table->addColumn('x', 'float');
         $table->addColumn('y', 'float');
-        
+
         // Define the primary key
         $table->setPrimaryKey(['id']);
     }
