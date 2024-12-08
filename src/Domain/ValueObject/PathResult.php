@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\ValueObject;
 
-class PathResult
+final class PathResult
 {
     public function __construct(
         public readonly array $path,

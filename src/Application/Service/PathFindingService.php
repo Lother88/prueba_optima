@@ -25,9 +25,6 @@ class PathFindingService
         $this->algorithm = $algorithm;
     }
 
-    /**
-     * Calcular el camino más corto entre dos puntos.
-     */
     public function calculateShortestPath(string $startId, string $endId): PathResult
     {
         $startPoint = $this->pointRepository->findById($startId);
@@ -42,9 +39,6 @@ class PathFindingService
         return $this->algorithm->findPath($graph, $startId, $endId);
     }
 
-    /**
-     * Construir el grafo en base a las uniones definidas por el usuario.
-     */
     private function buildGraph(): array
     {
         $graph = [];
@@ -61,7 +55,7 @@ class PathFindingService
             $distance = $union->distance;
 
             $graph[$start][$end] = $distance;
-            $graph[$end][$start] = $distance; // Bidireccional
+            $graph[$end][$start] = $distance;
         }
 
         return $graph;

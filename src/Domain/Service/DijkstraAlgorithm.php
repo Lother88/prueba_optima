@@ -11,13 +11,9 @@ final class DijkstraAlgorithm implements PathFindingAlgorithm
 {
     public function findPath(array $graph, string $start, string $end): PathResult
     {
-        // 1. Inicializar estructuras
         [$distances, $previousNodes] = $this->initializeGraph($graph, $start);
         $priorityQueue = $this->initializePriorityQueue($start);
-
         $visited = [];
-
-        // 2. Procesar la cola de prioridad
         while (!$priorityQueue->isEmpty()) {
             $currentNode = $priorityQueue->extract();
             if (isset($visited[$currentNode])) {
@@ -38,19 +34,13 @@ final class DijkstraAlgorithm implements PathFindingAlgorithm
             );
         }
 
-        // 3. Verificar si el nodo de destino es accesible
         $totalDistance = $distances[$end];
-
         if (PHP_INT_MAX === $totalDistance) {
             throw new \Exception("No hay camino válido entre $start y $end.");
         }
-
-        // Redondear la distancia total
         $totalDistance = round($totalDistance, 2);
 
-        // 4. Reconstruir el camino más corto
         $path = $this->reconstructPath($previousNodes, $start, $end);
-
         return new PathResult($path, $totalDistance);
     }
 
