@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Tests\Application\Service;
 
 use App\Application\Service\PathFindingService;

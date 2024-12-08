@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domain\Interface;
 
 use App\Domain\ValueObject\PathResult;
